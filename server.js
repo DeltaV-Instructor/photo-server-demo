@@ -55,6 +55,12 @@ const PORT = process.env.PORT || 5005;
 
 
 //ERRORS
+//ERRORS
+// eslint-disable-next-line no-unused-vars
+app.use((error, req, res, next) => {
+  console.log(error.message);
+  res.status(500).send(error.message);
+});
 
 //START SERVER LISTENING
 //server.method(1st, 2nd log out port);
