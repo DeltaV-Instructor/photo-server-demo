@@ -47,14 +47,57 @@ app.use(cors());
 //app.use() loads middlewear - we are loading cors so that requests, dont get blocked when they are local.
 const PORT = process.env.PORT || 5005;
 
-
 //ROUTES
+// ==== Routes ====
+/**
+app.get : attaches a listener of method type GET to the server with a (route, and a callback)
+'/' : route - we can visit the server at localhost:3002 or localhost:3002/ and
+trigger this callback
+(request, response) => : the callback function, think of it as (event) => on
+an event handler
+request : all the data from the client/front end and react or vue or angluar...
+response: all the data from us + we can attach data to it + we can trigger a
+response to start with this parameter
+response.send(<anything>) : takes the argument and sends it to the client/frontend
+*/
+app.get('/', (request, response) => {
+  response.status(200).send('Hello from our photo server');
+});
 
+
+
+app.get('/photos', (req, res, next)=> {
+  // TODO: get information from my frontend - keyword
+  // TODO: make an axios call to unsplash API and get data back
+  // TODO: select data to send back to the frontend. use NEW and class
+  try {
+    //front end will send us a value for a search for photos
+    let searchQueryFromTheFrontEnd = req.query.searchQuery;
+    console.log('🚀 ~ file: server.js:76 ~ app.get ~ searchQueryFromTheFrontEnd', searchQueryFromTheFrontEnd);
+
+    let url = `https://api/unsplash.com/search/photos/?client_id=${process.env.UNSPLASH_API_KEY}&query=${searchQueryFromTheFrontEnd}&format=json`;
+    console.log(url);
+    // use thunderclient to rebuild this api url.
+    // we also use thunderclient to build the weather api url.
+    // should send to a constructor to select data that we want back from api call
+    // use thunder client to build the URL
+    // look at render and talk about adding weather keys for api calls
+    // look at lab 8 tech requirements in trello
+
+  } catch (error) {
+    next(error);
+  }
+
+  res.send('hello');
+});
+
+app.get('*', (req, res) => {
+  res.status(404).send('These are not the droids your looking 404.');
+});
 
 //CLASSES
+//add photo constructor class to get the properties from our object from the api call
 
-
-//ERRORS
 //ERRORS
 // eslint-disable-next-line no-unused-vars
 app.use((error, req, res, next) => {
