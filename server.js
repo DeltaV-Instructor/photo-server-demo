@@ -33,13 +33,18 @@ not goDaddy (goDaddy is a DNS, redirects to where it lives)
 */
 
 //REQUIRES
-
-
-
-
+const express = require('express');
+const cors = require('cors');
+//Cross origin Resource sharing: allows connection between 2 local servers or websites: it can block or allow access to any list of urls. By default it allows localhost to talk to itself
+require('dotenv').config();
+const axios = require('axios');
 
 //USE
-
+//app === server
+const app = express();
+//create a server from the express library
+app.use(cors());
+//app.use() loads middlewear - we are loading cors so that requests, dont get blocked when they are local.
 
 //ROUTES
 
