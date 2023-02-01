@@ -45,12 +45,18 @@ const app = express();
 //create a server from the express library
 app.use(cors());
 //app.use() loads middlewear - we are loading cors so that requests, dont get blocked when they are local.
+const PORT = process.env.PORT || 5005;
+
 
 //ROUTES
 
 
 //CLASSES
 
+
 //ERRORS
 
 //START SERVER LISTENING
+//server.method(1st, 2nd log out port);
+//causes server to run and listen for when a route is hit.
+app.listen(PORT, ()=> console.log(`Listening on PORT: ${PORT}`));
